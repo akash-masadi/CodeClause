@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+    <title>ToDo</title>
+  </head>
+  <body class=" container-fluid align-items-around justify-contents-center" style="width:100vw; height: 100%;">
+        <h1 class="row justify-content-center align-items-center">To-Do List</h1>
+        <form class="row align-items-center justify-content-center gx-5" action="#">
+        <input class="col-8" type="text" id="inp" />
+        <input class="col-1" type="submit" value="Add" id="add" onclick="myfunc()" />
+      </form >
+    </div>
+    <div class="d-flex   align-items-center justify-content-around" id="list">
+      <ul class="" id="ulist">
+
+      </ul>
+    </div>
+    <div class=" d-flex align-items-center justify-content-around">
+      <button id="clear" onclick="clearmtd()">Clear</button>
+    </div>
+    <!-- <shade></shade> -->
+    <footer>
+      <cr
+        >Copyright &nbsp;<i class="fa-regular fa-copyright"> </i> &nbsp;2023
+        Akash Masadi. All rights reserved.</cr
+      >
+      <ul class="links">
+        <li>
+          <a
+            href="https://github.com/akash-masadi/"
+            target="_blank"
+            title="GitHub"
+            ><i class="fa-brands fa-github fa-2xl"></i
+          ></a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/akash-masadi-045477254/"
+            target="_blank"
+            title="LinkedIn"
+            ><i class="fa-brands fa-linkedin fa-2xl"></i
+          ></a>
+        </li>
+        <li>
+          <a href="https://wa.me/+917569902122" target="_blank" titel="Whatsapp"
+            ><i class="fa-brands fa-whatsapp fa-2xl"></i
+          ></a>
+        </li>
+        <li>
+          <a
+            href="https://www.twitter.com/akash_masadi/"
+            target="_blank"
+            title="Instagram"
+            ><i class="fa-brands fa-twitter fa-2xl"></i
+          ></a>
+        </li>
+        <li>
+          <a
+            href="https://www.instagram.com/akash_masadi/"
+            target="_blank"
+            title="Instagram"
+            ><i class="fa-brands fa-instagram fa-2xl"></i
+          ></a>
+        </li>
+      </ul>
+    </footer>
+    <script>
+      let inp = document.getElementById("inp");
+      let add = document.getElementById("add");
+      let list = document.getElementById("list");
+      let ul = document.getElementById("ulist");
+      let clr=document.getElementById("clear");
+      function myfunc() {
+        if (inp.value != "") {
+          let li = document.createElement("li");
+          let x = myfunc1();
+          x.childNodes[1].innerHTML = inp.value;
+          li.innerHTML = x.innerHTML;
+          ul.appendChild(li);
+          list.appendChild(ul); 
+          inp.value = "";
+          ul.style.display = "block";
+          clr.style.display = "block";
+        }
+    }
+    function myfunc1() {
+        let ch = document.createElement("input");
+        ch.setAttribute("type", "checkbox");
+        ch.setAttribute("id", "cb");
+        ch.setAttribute("onclick", "myfunc2(this)");
+        let la = document.createElement("label");
+        let div = document.createElement("div");
+        div.appendChild(ch);
+        div.appendChild(la);
+        return div;
+      }
+      function clearmtd() {
+        if(ul.innerHTML != "")
+        {
+        alert("Are you sure you want to clear the list?");
+        ul.innerHTML = "";
+        ul.style.display = "none";
+        console.log(ul.innerHTML);
+        clr.style.display = "none";
+        }
+      }
+      function myfunc2(e) {
+          if (e.checked) {
+              e.parentNode.childNodes[1].style.color = "#808080";
+              e.parentNode.childNodes[1].style.textDecoration = "line-through";
+            } else {
+                e.parentNode.childNodes[1].style.color = "#fff";
+          e.parentNode.childNodes[1].style.textDecoration = "none";
+        }
+    }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/8fbadcc80c.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
