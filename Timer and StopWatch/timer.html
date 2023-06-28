@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- BootStrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/stopwatch.png">
+    <!-- FontAwesome -->
+    <script
+      src="https://kit.fontawesome.com/8fbadcc80c.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Own CSS -->
+    <link rel="stylesheet" href="./css/tstyle.css" />
+    <title>Timer</title>
+  </head>
+  <body>
+    <main
+      class="container text-center d-flex flex-column justify-content-center align-items-center"
+    >
+      <!-- Title -->
+      <h1 class="row">Timer</h1>
+      <!-- <input type="text" pattern="^[0-5][0-9]\:[0-5][0-9]\.[0-9]{1,3}$" /> -->
+      <div class=" inp d-flex row align-items-around justify-content-between g-5 p-3" >
+      <input class=" x col HH" type="number" placeholder="HH"   min="0" max="12" step="1" style="width: 6em; text-align: center;color:#FF78C4;"> <h2 class="col"> : </h2>
+      <input class="x col MM" type="number"  placeholder="MM"  min="0" max="60" step="1" style="width: 6em; text-align: center;color:#FF78C4;"> <h2 class="col"> : </h2>
+      <input class="x col SS" type="number"  placeholder="SS"  min="0" max="60" step="1" style="width: 6em; text-align: center; color:#FF78C4;">
+
+    </div>
+      <!-- Timer -->
+      <div
+        class="col d-flex flex-row justify-content-center align-items-center"
+      >
+        <h2 class="timer-display row template">00 : 00 : 00 : 00</h2>
+      </div>
+      <div
+        class="row d-flex flex-row justify-content-center align-items-center"
+        style="gap: 1em"
+      >
+        <!-- Pause Button -->
+        <img
+          id="pause"
+          src="./assets/pause.png"
+          alt="pause"
+          style="width: 4em; height: 3em"
+          onclick=""
+        />
+        <!-- Start Button -->
+        <img
+          id="play"
+          src="./assets/play.png"
+          alt="play"
+          style="width: 5em; height: 5em; margin-bottom: 2em"
+        />
+        <!-- Reset Button -->
+        <img
+          id="reset"
+          src="./assets/replay.png"
+          alt="replay"
+          style="width: 4em; height: 3.2em"
+        />
+      </div>
+    </main>
+    <!--  -->
+    <footer>
+      <cr
+        >Copyright &nbsp;<i class="fa-regular fa-copyright"> </i> &nbsp;2023
+        Akash Masadi. All rights reserved.</cr
+      >
+      <ul class="links">
+        <li>
+          <a
+            href="https://github.com/akash-masadi/"
+            target="_blank"
+            title="GitHub"
+            ><i class="fa-brands fa-github fa-2xl"></i
+          ></a>
+        </li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/akash-masadi-045477254/"
+            target="_blank"
+            title="LinkedIn"
+            ><i class="fa-brands fa-linkedin fa-2xl"></i
+          ></a>
+        </li>
+        <li>
+          <a href="https://wa.me/+917569902122" target="_blank" titel="Whatsapp"
+            ><i class="fa-brands fa-whatsapp fa-2xl"></i
+          ></a>
+        </li>
+        <li>
+          <a
+            href="https://www.twitter.com/akash_masadi/"
+            target="_blank"
+            title="Instagram"
+            ><i class="fa-brands fa-twitter fa-2xl"></i
+          ></a>
+        </li>
+        <li>
+          <a
+            href="https://www.instagram.com/akash_masadi/"
+            target="_blank"
+            title="Instagram"
+            ><i class="fa-brands fa-instagram fa-2xl"></i
+          ></a>
+        </li>
+      </ul>
+    </footer>
+    <script>
+      let [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+      let timeRef = document.querySelector(".timer-display");
+      let inp=document.querySelector(".inp");
+      let int = null;
+
+      document.getElementById("play").addEventListener("click", () => {
+        if (int !== null) {
+          clearInterval(int);
+        }
+        hours=document.querySelector(".HH").value;
+        minutes=document.querySelector(".MM").value;
+        seconds=document.querySelector(".SS").value;
+        if(seconds>60 || minutes>60 || hours>12){
+          alert("Invalid Input");
+          return;
+        }
+        if(seconds==""){
+          seconds=0;
+        }
+        if(minutes==""){
+          minutes=0;
+        }
+        if(hours==""){
+          hours=0;
+        }
+        milliseconds=0;
+        int = setInterval(displayTimer, 10);
+      });
+
+      document.getElementById("pause").addEventListener("click", () => {
+        clearInterval(int);
+      });
+
+      document.getElementById("reset").addEventListener("click", () => {
+        clearInterval(int);
+        [milliseconds, seconds, minutes, hours] = [0, 0, 0, 0];
+        timeRef.innerHTML = "00 : 00 : 00 : 000 ";
+      });
+
+      function displayTimer() {
+       if(milliseconds==0){
+         if(seconds==0){
+           if(minutes==0){
+             if(hours==0){
+               alert("Time's Up");
+               clearInterval(int);
+             }
+             else{
+               hours--;
+               minutes=59;
+               seconds=59;
+               milliseconds=99;
+             }
+           }
+           else{
+             minutes--;
+             seconds=59;
+             milliseconds=99;
+           }
+         }
+         else{
+           seconds--;
+           milliseconds=99;
+         }
+        }
+        else{
+          milliseconds--;
+        }
+
+        let h = hours < 10 ? "0" + hours : hours;
+        let m = minutes < 10 ? "0" + minutes : minutes;
+        let s = seconds < 10 ? "0" + seconds : seconds;
+        let ms =
+          milliseconds < 10
+            ? "0" + milliseconds
+            : milliseconds;
+
+        timeRef.innerHTML = `${h} : ${m} : ${s} : ${ms}`;
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
